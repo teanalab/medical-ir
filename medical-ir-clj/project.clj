@@ -4,7 +4,9 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [metamap-api "1.0-SNAPSHOT"]]
+                 [metamap-api "1.0-SNAPSHOT"]
+                 [korma "0.3.2"]
+                 [mysql/mysql-connector-java "5.1.31"]]
   :main ^:skip-aot medical-ir-clj.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

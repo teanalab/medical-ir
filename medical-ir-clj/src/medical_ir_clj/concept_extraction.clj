@@ -1,6 +1,5 @@
 (ns medical-ir-clj.concept-extraction
-  (:require [metamap-api.metamap-api :as mm])
-  (:gen-class))
+  (:require [metamap-api.metamap-api :as mm]))
 
 (def mmapi (mm/api-instantiate))
 

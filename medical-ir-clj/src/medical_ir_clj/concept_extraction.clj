@@ -1,5 +1,6 @@
 (ns medical-ir-clj.concept-extraction
-  (:require [metamap-api.metamap-api :as mm]))
+  (:require [metamap-api.metamap-api :as mm]
+            [medical-ir-clj.concept-util :refer :all]))
 
 (def mmapi (mm/api-instantiate))
 
@@ -21,7 +22,12 @@
   [utterance-list]
   (map :conceptid (apply concat (get-ev-list utterance-list))))
 
-(defn get-concepts
+(defn get-concept-ids
   [text]
   (let [[{utterance-list :utterance-list}] (process-string text)]
     (flatten (map get-conceptid utterance-list))))
+
+(defn get-concepts-with-names
+  [text]
+  (map #(hash-map :concept-id % :concept-name (concept-name %))
+       (get-concept-ids text)))

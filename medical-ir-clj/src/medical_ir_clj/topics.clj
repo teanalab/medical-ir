@@ -35,6 +35,7 @@
 ;;; Printing
 
 (def indent-str "  ")
+
 (defn print-indent
   [indent-level]
   (print (apply str (repeat indent-level indent-str))))
@@ -62,3 +63,7 @@
   []
   (doseq [topic (extract-relations topics)]
     (print-topic topic 0)))
+
+(defn -main
+  [& args]
+  (print-topics))

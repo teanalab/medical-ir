@@ -12,6 +12,6 @@
                                               javax.jms/jms
                                               com.sun.jdmk/jmxtools
                                               com.sun.jmx/jmxri]]]
-  :main ^:skip-aot medical-ir-clj.core
+  :main ^:skip-aot medical-ir-clj.topics
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

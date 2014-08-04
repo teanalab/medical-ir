@@ -6,14 +6,14 @@
             (print \+)
             (doseq [arglen (map count args)]
               (print (apply str (repeat arglen \-)))
-              (print \+))
-            (println))
+              (print \+)))
           (print-args []
             (print \|)
             (doseq [arg args]
               (print arg)
-              (print \|))
-            (println))]
+              (print \|)))]
     (print-horizontal-bound)
+    (println)
     (print-args)
+    (println)
     (print-horizontal-bound)))

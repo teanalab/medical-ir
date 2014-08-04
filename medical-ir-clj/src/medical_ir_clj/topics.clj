@@ -25,7 +25,7 @@
   (for [concept concepts]
     (assoc concept :relationships
            (map #(assoc % :concept-name (concept-name (:cui2 %)))
-                                   (get-relations (:concept-id concept))))))
+                (get-relations (:concept-id concept))))))
 
 (defn extract-relations
   [topics]
@@ -42,11 +42,11 @@
 
 (defn print-topic
   [{:keys [type text concepts]}]
+  (println "@@@")
   (print-in-rects type)
   (println text)
   (doseq [concept concepts]
-    (print-concept concept))
-  (println \=))
+    (print-concept concept)))
 
 (defn print-topics
   []

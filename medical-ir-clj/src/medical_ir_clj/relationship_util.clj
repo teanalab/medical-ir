@@ -6,4 +6,8 @@
   [concept-id]
   (select mrrel
           (fields :cui2 :rel :rela)
-          (where {:cui1 concept-id})))
+          (where {:cui1 concept-id})
+          (group :cui2 :rel :rela)
+          (order :cui2)
+          (order :rel)
+          (order :rela)))

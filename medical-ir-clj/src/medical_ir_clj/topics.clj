@@ -6,7 +6,8 @@
             [clojure.pprint :refer [print-table]]
             [medical-ir-clj.concept-extraction :refer :all]
             [medical-ir-clj.concept-util :refer :all]
-            [medical-ir-clj.relationship-util :refer :all]))
+            [medical-ir-clj.relationship-util :refer :all]
+            [medical-ir-clj.print-util :refer :all]))
 
 (def topics-xml (-> "topics.xml" io/resource io/file xml/parse zip/xml-zip))
 
@@ -34,36 +35,24 @@
 
 ;;; Printing
 
-(def indent-str "  ")
-
-(defn print-indent
-  [indent-level]
-  (print (apply str (repeat indent-level indent-str))))
-
-(defn print-relationship
-  [{:keys [concept-name rel rela]} indent-level]
-  (print-indent indent-level)
-  (println (str concept-name "\tREL: " rel "\tRELA: " rela)))
-
 (defn print-concept
-  [{:keys [concept-name relationships]} indent-level]
-  (print-indent indent-level)
-  (println concept-name)
-  (doseq [relationship relationships]
-    (print-relationship relationship (inc indent-level))))
+  [{:keys [concept-id concept-name relationships]}]
+  (print-in-rects concept-id concept-name)
+  (print-table [:cui2 :concept-name :rel :rela] relationships))
 
 (defn print-topic
-  [{:keys [type text concepts]} indent-level]
-  (println (str "Type: " type))
-  (println (str "Text: " text))
+  [{:keys [type text concepts]}]
+  (print-in-rects type)
+  (println text)
   (doseq [concept concepts]
-    (print-concept concept (inc indent-level))))
+    (print-concept concept))
+  (println \=))
 
 (defn print-topics
   []
   (doseq [topic (extract-relations topics)]
-    (print-topic topic 0)))
+    (print-topic topic)))
 
 (defn -main
-  [& args]
+  []
   (print-topics))

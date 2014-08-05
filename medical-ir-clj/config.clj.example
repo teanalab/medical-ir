@@ -1,3 +1,4 @@
 {:database {:db "umls"
             :user "root"
-            :password ""}}
+            :password ""}
+ :source-collection-path "/home/fsqcds/cds-track/pmc-text"}

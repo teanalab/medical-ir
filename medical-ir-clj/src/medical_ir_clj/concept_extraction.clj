@@ -24,8 +24,10 @@
 
 (defn get-concept-ids
   [text]
-  (let [[{utterance-list :utterance-list}] (process-string text)]
-    (flatten (map get-conceptid utterance-list))))
+  (if (clojure.string/blank? text)
+    nil
+    (let [[{utterance-list :utterance-list}] (process-string text)]
+     (flatten (map get-conceptid utterance-list)))))
 
 (defn get-concepts-with-names
   [text]

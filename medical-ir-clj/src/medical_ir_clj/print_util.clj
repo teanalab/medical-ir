@@ -17,3 +17,8 @@
     (print-args)
     (println)
     (print-horizontal-bound)))
+
+(defn println-in-rects
+  [& args]
+  (print-in-rects args)
+  (println))

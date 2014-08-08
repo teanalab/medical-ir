@@ -37,13 +37,13 @@
 
 (defn print-concept
   [{:keys [concept-id concept-name relationships]}]
-  (print-in-rects concept-id concept-name)
+  (apply print-in-rects (conj (concept-stys concept-id) concept-id concept-name))
   (print-table [:cui2 :concept-name :rel :rela] relationships))
 
 (defn print-topic
   [{:keys [type text concepts]}]
   (println "@@@")
-  (print-in-rects type)
+  (println-in-rects type)
   (println text)
   (doseq [concept concepts]
     (print-concept concept)))

@@ -14,3 +14,9 @@
               (limit 1))
       first
       :str))
+
+(defn concept-stys
+  [concept-id]
+  (map :sty (select mrsty
+                    (fields :sty)
+                    (where {:cui concept-id}))))

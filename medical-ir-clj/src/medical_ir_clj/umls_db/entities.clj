@@ -5,3 +5,5 @@
 (defentity mrconso)
 
 (defentity mrrel)
+
+(defentity mrsty)

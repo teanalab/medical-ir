@@ -1,8 +1,13 @@
 (ns medical-ir-clj.documents
+  "Functions to export corpus in trectext format, optionally extracting
+  concepts. Before running this on TREC 2014 collection you should delete
+  pmc-text-01/11/2760706.nxml file because it has invalid xml (or you can just
+  correct it)."
   (:require [clojure.string :as str]
             [clojure.java.io :as io]
             [clojure.xml :as xml]
             [clojure.zip :as zip]
+            [clojure.data.zip :as zf]
             [clojure.data.zip.xml :as zip-xml]
             [medical-ir-clj.core :refer :all]
             [medical-ir-clj.concept-extraction :refer [get-concept-ids]])
@@ -21,30 +26,57 @@
                             clojure.java.io/file
                             file-seq)))
 
-(defn cut-text
-  [body]
-  (if body
-    (str/join " " (take 100 (str/split body #"\s+")))
-    nil))
+(defn text
+  "Modified version of clojure.data.zip.xml/text. Inserts spaces between tags
+  content."
+  [loc]
+  (.replaceAll
+   ^String (str/join " " (zip-xml/xml-> loc zf/descendants zip/node string?))
+   (str "[\\s" (char 160) "]+") " "))
 
 (defn extract-summary-and-body
   [nxml-file]
   (let [root (-> nxml-file (xml/parse startparse-sax) zip/xml-zip)]
-    {:abstract (cut-text (zip-xml/xml1-> root :front :article-meta :abstract zip-xml/text))
-     :body (cut-text (zip-xml/xml1-> root :body zip-xml/text))}))
+    {:abstract (zip-xml/xml1-> root :front :article-meta :abstract text)
+     :body (zip-xml/xml1-> root :body text)}))
+
+(defn clean-text
+  "Get rid of non-ASCII characters"
+  [text]
+  (if (string? text)
+    (clojure.string/replace text #"[^\u0000-\u007F]" "")
+    text))
 
 (defn extract-text
   [nxml-file]
   (let [{:keys [abstract body]} (extract-summary-and-body nxml-file)]
-    (or abstract body)))
+    (str abstract " " body)))
 
-(defn -main
+(defn extract-concept-ids
+  [nxml-file]
+  (->> nxml-file
+       extract-text
+       clean-text
+       get-concept-ids
+       (str/join \ )))
+
+(defn trectext-str
+  [nxml-file text-function]
+  (str
+   "<DOC>\n"
+   "<DOCNO>" (str/replace-first (.getName nxml-file) #".nxml" "") "</DOCNO>\n"
+   "<TEXT>\n"
+   (text-function nxml-file) "\n"
+   "</TEXT>\n"
+   "</DOC>"))
+
+(defn trectext-fulltext
   []
   (doseq [nxml-file nxml-files]
-    (print (str
-            "<DOC> <DOCNO>"
-            (str/replace-first (.getName nxml-file) #".nxml" "")
-            "</DOCNO> <TEXT> "))
-    (flush)
-    (println (str (str/join \  (get-concept-ids (extract-text nxml-file)))
-                  "</TEXT> </DOC>"))))
+    (println (trectext-str nxml-file extract-text))))
+
+
+(defn trectext-concepts
+  []
+  (doseq [nxml-file nxml-files]
+    (println (trectext-str nxml-file extract-concept-ids))))

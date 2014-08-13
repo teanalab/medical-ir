@@ -11,7 +11,9 @@
                  [log4j "1.2.15" :exclusions [javax.mail/mail
                                               javax.jms/jms
                                               com.sun.jdmk/jmxtools
-                                              com.sun.jmx/jmxri]]]
+                                              com.sun.jmx/jmxri]]
+                 [org.lemurproject.galago/core "3.7-SNAPSHOT"]
+                 [org.clojure/data.json "0.2.5"]]
   :main ^:skip-aot medical-ir-clj.topics
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

@@ -13,7 +13,8 @@
 
 (def topics
   (for [m (zip-xml/xml-> topics-xml :topic)]
-    {:type (zip-xml/attr m :type)
+    {:number (read-string (zip-xml/attr m :number))
+     :type (zip-xml/attr m :type)
      :text (zip-xml/xml1-> m :summary zip-xml/text)}))
 
 (defn extract-concepts

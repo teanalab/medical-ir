@@ -1,7 +1,6 @@
-(ns medical-ir-clj.query-expand
-  (:use medical-ir-clj.relationship-util
-        medical-ir-clj.concept-util))
+(ns medical-ir-clj.query-expand)
 
-(defn expand-concepts
-  [concepts]
-  (map (partial expand-concept concepts)))
+
+(defn expand-text-combine
+  [query]
+  (str "#combine(" (clojure.string/replace query #"\." "") ")"))

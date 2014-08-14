@@ -1,4 +1,5 @@
 {:database {:db "umls"
             :user "root"
             :password ""}
- :source-collection-path "/home/fsqcds/cds-track/pmc-text"}
+ :source-collection-path "/home/fsqcds/pmc-text"
+ :galago-index-path "/home/fsqcds/galago-fulltext-index"}

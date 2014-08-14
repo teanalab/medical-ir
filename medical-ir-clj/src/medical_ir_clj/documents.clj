@@ -60,11 +60,15 @@
        get-concept-ids
        (str/join \ )))
 
+(defn extract-pmcid
+  [nxml-file]
+  (str/replace-first (.getName nxml-file) #".nxml" ""))
+
 (defn trectext-str
   [nxml-file text-function]
   (str
    "<DOC>\n"
-   "<DOCNO>" (str/replace-first (.getName nxml-file) #".nxml" "") "</DOCNO>\n"
+   "<DOCNO>" (extract-pmcid nxml-file) "</DOCNO>\n"
    "<TEXT>\n"
    (text-function nxml-file) "\n"
    "</TEXT>\n"
@@ -80,3 +84,10 @@
   []
   (doseq [nxml-file nxml-files]
     (println (trectext-str nxml-file extract-concept-ids))))
+
+(defn metamap-batch
+  []
+  (doseq [nxml-file nxml-files]
+    (println (str (extract-pmcid nxml-file)
+                  "|"
+                  (-> nxml-file extract-text clean-text)))))

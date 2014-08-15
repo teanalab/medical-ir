@@ -42,5 +42,5 @@
 
 (defn -main
   [& args]
-  (evaluate expand-text-combine (-> "qrelsDS.txt" io/resource io/file str))
-  (evaluate expand-text-combine (-> "qrelsLDA.txt" io/resource io/file str)))
+  (evaluate expand-text-sequential-mrf (-> "qrelsDS.txt" io/resource io/file str))
+  (evaluate expand-text-sequential-mrf (-> "qrelsLDA.txt" io/resource io/file str)))

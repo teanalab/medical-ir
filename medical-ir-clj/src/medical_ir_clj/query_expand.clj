@@ -22,8 +22,8 @@
 
 (defn expand-tokens-sequential-mrf
   [tokens]
-  (str "#combine:0=0.8:1=0.1:2=0.1( " (expand-tokens-combine tokens)
-       (expand-tokens-bigrams tokens "#od:1")
+  (str "#combine:0=0.8:1=0.1:2=0.1( " (expand-tokens-combine tokens) " "
+       (expand-tokens-bigrams tokens "#od:1") " "
        (expand-tokens-bigrams tokens "#uw:8") " )"))
 
 (defn expand-text-query
@@ -32,4 +32,4 @@
 
 (defn expand-text-sequential-mrf
   [query]
-  (expand-text-query query expand-text-sequential-mrf))
+  (expand-text-query query expand-tokens-sequential-mrf))

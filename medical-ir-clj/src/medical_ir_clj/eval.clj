@@ -3,11 +3,12 @@
             [clojure.java.io :as io]
             [medical-ir-clj.core :refer :all]
             [medical-ir-clj.topics :refer [topics]]
-            [medical-ir-clj.query-expand :refer :all])
+            [medical-ir-clj.query-expand :refer :all]
+            [medical-ir-clj.print-util :refer :all])
   (:import java.io.PrintStream
            org.lemurproject.galago.core.tools.App))
 
-(def default-expansion-function expand-text-sequential-mrf)
+(def default-expansion-function (partial galago-query-operator "sdm"))
 
 (def eval-topics (filter #(<= (:number %) 10) topics))
 
@@ -61,10 +62,22 @@
                            (str "--baseline=" batch-search-results)]))))
 
 
+(defn print-metrics-for-expansion
+  [query-expansion-function]
+  (println "qrelsLDA.txt:")
+  (evaluate query-expansion-function
+            (-> "qrelsLDA.txt" io/resource io/file str))
+  (println)
+  (println "qrelsDS.txt:")
+  (evaluate query-expansion-function
+            (-> "qrelsDS.txt" io/resource io/file str)))
+
+(def galago-operators ["combine" "sdm" "fulldep" "wsdm"])
+
 (defn -main
   [& args]
-  (println "qrelsLDA.txt: ")
-  (evaluate default-expansion-function (-> "qrelsLDA.txt" io/resource io/file str))
-  (println)
-  (println "qrelsDS.txt: ")
-  (evaluate default-expansion-function (-> "qrelsDS.txt" io/resource io/file str)))
+  (doseq [galago-operator galago-operators]
+    (println-in-rects galago-operator)
+    (print-metrics-for-expansion
+     (partial galago-query-operator galago-operator))
+    (println)))

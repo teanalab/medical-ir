@@ -20,5 +20,5 @@
 
 (defn println-in-rects
   [& args]
-  (print-in-rects args)
+  (apply print-in-rects args)
   (println))

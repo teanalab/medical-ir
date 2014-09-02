@@ -8,7 +8,7 @@
   (:import java.io.PrintStream
            org.lemurproject.galago.core.tools.App))
 
-(def default-expansion-function (partial galago-query-operator "sdm"))
+(def default-expansion-function (partial galago-query-operator "wsdm"))
 
 (def eval-topics (filter #(<= (:number %) 10) topics))
 
@@ -30,10 +30,10 @@
     (spit queries-json-file (queries-json query-expansion-function))
     queries-json-file))
 
-(defn queries-json-file
+(defn queries-json-print
   "make queries file with required filename"
-  [filename]
-  (spit filename (queries-json default-expansion-function)))
+  [& args]
+  (println (queries-json default-expansion-function)))
 
 (defn batch-search
   [query-expansion-function print-stream]
@@ -50,9 +50,9 @@
     (batch-search query-expansion-function (PrintStream. search-results))
     search-results))
 
-(defn batch-search-file
-  [filename]
-  (batch-search default-expansion-function (PrintStream. filename)))
+(defn batch-search-print
+  []
+  (batch-search default-expansion-function System/out))
 
 (defn evaluate
   [query-expansion-function judgements-filepath]

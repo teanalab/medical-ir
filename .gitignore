@@ -27,3 +27,17 @@ tramp
 
 # AUCTeX auto folder
 /auto/
+
+# From leiningen
+/target
+/classes
+/checkouts
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+/.lein-*
+/.nrepl-port
+
+# Project specific
+config.clj

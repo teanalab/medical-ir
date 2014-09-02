@@ -1,10 +1,10 @@
-(ns medical-ir-clj.eval
+(ns medical-ir.eval
   (:require [clojure.data.json :as json]
             [clojure.java.io :as io]
-            [medical-ir-clj.core :refer :all]
-            [medical-ir-clj.topics :refer [topics]]
-            [medical-ir-clj.query-expand :refer :all]
-            [medical-ir-clj.print-util :refer :all])
+            [medical-ir.core :refer :all]
+            [medical-ir.topics :refer [topics]]
+            [medical-ir.query-expand :refer :all]
+            [medical-ir.print-util :refer :all])
   (:import java.io.PrintStream
            org.lemurproject.galago.core.tools.App))
 

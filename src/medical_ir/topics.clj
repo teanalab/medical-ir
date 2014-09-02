@@ -1,13 +1,13 @@
-(ns medical-ir-clj.topics
+(ns medical-ir.topics
   (:require [clojure.java.io :as io]
             [clojure.xml :as xml]
             [clojure.zip :as zip]
             [clojure.data.zip.xml :as zip-xml]
             [clojure.pprint :refer [print-table]]
-            [medical-ir-clj.concept-extraction :refer :all]
-            [medical-ir-clj.concept-util :refer :all]
-            [medical-ir-clj.relationship-util :refer :all]
-            [medical-ir-clj.print-util :refer :all]))
+            [medical-ir.concept-extraction :refer :all]
+            [medical-ir.concept-util :refer :all]
+            [medical-ir.relationship-util :refer :all]
+            [medical-ir.print-util :refer :all]))
 
 (def topics-xml (-> "topics.xml" io/resource io/file xml/parse zip/xml-zip))
 

@@ -1,4 +1,4 @@
-(defproject medical-ir-clj "0.1.0-SNAPSHOT"
+(defproject medical-ir "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -14,6 +14,6 @@
                                               com.sun.jmx/jmxri]]
                  [org.lemurproject.galago/core "3.7-SNAPSHOT"]
                  [org.clojure/data.json "0.2.5"]]
-  :main ^:skip-aot medical-ir-clj.topics
+  :main ^:skip-aot medical-ir.topics
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

@@ -1,6 +1,6 @@
-(ns medical-ir-clj.concept-extraction-test
+(ns medical-ir.concept-extraction-test
   (:require [clojure.test :refer :all]
-            [medical-ir-clj.concept-extraction :refer :all]))
+            [medical-ir.concept-extraction :refer :all]))
 
 (deftest concept-extraction
   (testing "Simple medical term"

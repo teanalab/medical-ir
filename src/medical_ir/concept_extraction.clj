@@ -1,6 +1,6 @@
-(ns medical-ir-clj.concept-extraction
+(ns medical-ir.concept-extraction
   (:require [metamap-api.metamap-api :as mm]
-            [medical-ir-clj.concept-util :refer :all]))
+            [medical-ir.concept-util :refer :all]))
 
 (def mmapi (mm/api-instantiate))
 

@@ -1,5 +1,5 @@
-(ns medical-ir-clj.concept-util
-  (:require [medical-ir-clj.umls-db.entities :refer :all]
+(ns medical-ir.concept-util
+  (:require [medical-ir.umls-db.entities :refer :all]
             [korma.core :refer :all]))
 
 (defn concept-name

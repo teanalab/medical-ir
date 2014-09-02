@@ -1,4 +1,4 @@
-(ns medical-ir-clj.query-expand
+(ns medical-ir.query-expand
   (:require [clojure.java.io :as io]
             [clojure.string :as str]))
 

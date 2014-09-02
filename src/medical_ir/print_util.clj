@@ -1,4 +1,4 @@
-(ns medical-ir-clj.print-util)
+(ns medical-ir.print-util)
 
 (defn print-in-rects
   [& args]

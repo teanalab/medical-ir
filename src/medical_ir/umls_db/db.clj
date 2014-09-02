@@ -1,5 +1,5 @@
-(ns medical-ir-clj.umls-db.db
-  (:require [medical-ir-clj.core :refer [config]]
+(ns medical-ir.umls-db.db
+  (:require [medical-ir.core :refer [config]]
             [korma.db :refer :all]
             [korma.config :refer [set-naming]]
             [clojure.string :as string]))

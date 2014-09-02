@@ -1,4 +1,4 @@
-(ns medical-ir-clj.documents
+(ns medical-ir.documents
   "Functions to export corpus in trectext format, optionally extracting
   concepts. Before running this on TREC 2014 collection you should delete
   pmc-text-01/11/2760706.nxml file because it has invalid xml (or you can just
@@ -9,8 +9,8 @@
             [clojure.zip :as zip]
             [clojure.data.zip :as zf]
             [clojure.data.zip.xml :as zip-xml]
-            [medical-ir-clj.core :refer :all]
-            [medical-ir-clj.concept-extraction :refer [get-concept-ids]])
+            [medical-ir.core :refer :all]
+            [medical-ir.concept-extraction :refer [get-concept-ids]])
   (:import (javax.xml.parsers SAXParser SAXParserFactory)))
 
 (defn startparse-sax

@@ -1,5 +1,5 @@
-(ns medical-ir-clj.relationship-util
-  (:require [medical-ir-clj.umls-db.entities :refer :all]
+(ns medical-ir.relationship-util
+  (:require [medical-ir.umls-db.entities :refer :all]
             [korma.core :refer :all]))
 
 (defn get-relations

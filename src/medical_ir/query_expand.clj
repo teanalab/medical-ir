@@ -1,6 +1,5 @@
 (ns medical-ir.query-expand
-  (:require [clojure.java.io :as io]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (defn remove-punctuation
   [text]

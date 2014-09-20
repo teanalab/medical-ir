@@ -4,4 +4,4 @@
 
 (deftest concept-extraction
   (testing "Simple medical term"
-    (is (= '("C0242379") (get-concept-ids "lung cancer")))))
+    (is (= '("C0242379") (map :id (get-concepts-with-names "lung cancer"))))))

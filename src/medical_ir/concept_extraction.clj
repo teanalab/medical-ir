@@ -18,18 +18,21 @@
   [utterance-list]
   (map :ev-list (apply concat (get-mappings utterance-list))))
 
-(defn get-conceptid
-  [utterance-list]
-  (map :conceptid (apply concat (get-ev-list utterance-list))))
+(defn get-concept
+  [utterance-list text]
+  (map #(hash-map :id (:conceptid %)
+                  :name (:conceptname %)
+                  :preferredname (:preferredname %)
+                  :text (subs text (-> % :position first :start)
+                              (+ (-> % :position first :start)
+                                 (-> % :position first :length)))
+                  :words (:matchedwords %)
+                  :semtypes (:semtypes %))
+       (apply concat (get-ev-list utterance-list))))
 
-(defn get-concept-ids
+(defn get-concepts-with-names
   [text]
   (if (clojure.string/blank? text)
     nil
     (let [[{utterance-list :utterance-list}] (process-string text)]
-     (flatten (map get-conceptid utterance-list)))))
-
-(defn get-concepts-with-names
-  [text]
-  (map #(hash-map :concept-id % :concept-name (concept-name %))
-       (get-concept-ids text)))
+     (flatten (map #(get-concept % text) utterance-list)))))

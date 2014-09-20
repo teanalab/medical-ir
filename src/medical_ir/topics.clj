@@ -26,7 +26,7 @@
   (for [concept concepts]
     (assoc concept :relationships
            (map #(assoc % :concept-name (concept-name (:cui2 %)))
-                (get-relations (:concept-id concept))))))
+                (get-relations (:id concept))))))
 
 (defn extract-relations
   [topics]
@@ -37,8 +37,8 @@
 ;;; Printing
 
 (defn print-concept
-  [{:keys [concept-id concept-name relationships]}]
-  (apply print-in-rects (conj (concept-stys concept-id) concept-id concept-name))
+  [{:keys [id name relationships]}]
+  (apply print-in-rects (conj (concept-stys id) id name))
   (print-table [:cui2 :concept-name :rel :rela] relationships))
 
 (defn print-topic
